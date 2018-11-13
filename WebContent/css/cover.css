@@ -1,0 +1,42 @@
+html,body { 
+background: url(../imagens/medico.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+.textinho{
+    color: black;
+    margin-top: 15px;
+    margin-bottom: 0px; 
+}
+nav{
+	background-color: transparent;
+}
+.centered {
+    margin: 0 auto ;
+    float: none;
+}
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+.btn{
+	background-color: black;
+	border-radius: 0px;
+}
+
+.navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: 1rem;
+    background-color: white;
+}
+.p-0 {
+    padding: 0!important;
+}
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
