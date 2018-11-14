@@ -48,6 +48,7 @@
                 </div>
               </form>
             </div>
+            ${message}
             <div class="card-footer">
               <div class="d-flex justify-content-center links">
                Não possui cadastro?<a href="cadastro.jsp">Cadastre-se</a>

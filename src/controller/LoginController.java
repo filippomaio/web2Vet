@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.*;
 
@@ -33,6 +34,16 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session  = request.getSession();
+	    session.removeAttribute("usuario");
+	    response.sendRedirect("login.jsp");		    	
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=UTF-8");
         String cpf = request.getParameter("cpf");
         String senha = request.getParameter("senha");
@@ -43,21 +54,16 @@ public class LoginController extends HttpServlet {
 		//l.add("D");
 		if (sessao.logar(cpf, senha)) {
 			//request.setAttribute("lista", l);
+			HttpSession session = request.getSession();
+            session.setAttribute("usuario", sessao);
 			request.setAttribute("usuario", sessao);
 			request.getRequestDispatcher("bem_vindo.jsp").forward(request,response);
         }else {
         	//revisar
-        	response.sendRedirect("login.jsp?error=1");
+        	request.setAttribute("message", "Login inválido");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-    	
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
