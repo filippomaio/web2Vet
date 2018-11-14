@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("bem_vindo.jsp").forward(request,response);
         }else {
         	//revisar
-        	response.sendRedirect("Login.jsp?error=1");
+        	response.sendRedirect("login.jsp?error=1");
         }
     	
 	}
