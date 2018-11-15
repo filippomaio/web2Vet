@@ -11,14 +11,14 @@ public class AnimalModel {
 	private int idade;
 	private String tipo;
 	private String cor;
-	private int idCliente;
+	private int cpfCliente;
 	
 	public AnimalModel(Connection cn) {
         this.cn = cn;
     }
 	
-	public boolean criarAnimal(String nome, int idade, String tipo, String cor, int idCliente) {
-		String query = "INSERT INTO prontuariobd.medico(nome, idade, tipo, cor, idCliente) VALUES (?,?,?,?,?)";
+	public boolean criarAnimal(String nome, int idade, String tipo, String cor, int cpfCliente) {
+		String query = "INSERT INTO prontuariobd.medico(nome, idade, tipo, cor, cpfCliente) VALUES (?,?,?,?,?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
@@ -26,7 +26,7 @@ public class AnimalModel {
             ps.setInt(2, idade);
             ps.setString(3, tipo);
             ps.setString(4, cor);
-            ps.setInt(5, idCliente);
+            ps.setInt(5, cpfCliente);
             ps.executeUpdate();
             System.out.println("Cadastrado com sucesso");
         
@@ -50,14 +50,14 @@ public class AnimalModel {
             this.idade = rs.getInt("idade");
             this.tipo = rs.getString("tipo");
             this.cor = rs.getString("cor");
-            this.idCliente = rs.getInt("idCliente");
+            this.cpfCliente = rs.getInt("cpfCliente");
             
             System.out.println("Id: " + rs.getInt("id"));
             System.out.println("Nome: " + rs.getString("nome"));
             System.out.println("Idade: " + rs.getInt("idade"));
             System.out.println("Tipo: " + rs.getString("tipo"));
             System.out.println("Cor: " + rs.getString("cor"));
-            System.out.println("idCliente: " + rs.getInt("idCliente"));
+            System.out.println("cpfCliente: " + rs.getInt("cpfCliente"));
             return this;
             
         }catch(SQLException ex){
@@ -68,8 +68,8 @@ public class AnimalModel {
 		return null;
 	}
 	
-	public boolean atualizarAnimal(int id, String nome, int idade, String tipo, String cor, int idCliente) {
-		String query = "UPDATE prontuariobd.animal SET nome = ?, idade = ?, tipo = ?, cor = ?, idCliente = ? WHERE prontuariobd.animal.id = (?)";
+	public boolean atualizarAnimal(int id, String nome, int idade, String tipo, String cor, int cpfCliente) {
+		String query = "UPDATE prontuariobd.animal SET nome = ?, idade = ?, tipo = ?, cor = ?, cpfCliente = ? WHERE prontuariobd.animal.id = (?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
@@ -77,7 +77,7 @@ public class AnimalModel {
             ps.setInt(2, idade);
             ps.setString(3, tipo);
             ps.setString(4, cor);
-            ps.setInt(5, idCliente);
+            ps.setInt(5, cpfCliente);
             ps.setInt(6, id);
             ps.executeUpdate();
             System.out.println("Alterado com sucesso");

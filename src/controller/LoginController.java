@@ -1,8 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,14 +18,14 @@ import model.*;
 @WebServlet("/Login.do")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private LoginModel sessao;
+	private LoginModel usuario;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public LoginController() {
         super();
-        sessao = new LoginModel();
-        sessao.conectar("localhost");
+        usuario = new LoginModel();
+        usuario.conectar("localhost");
     }
 
 	/**
@@ -34,8 +33,8 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session  = request.getSession();
-	    session.removeAttribute("usuario");
+		HttpSession sessao  = request.getSession();
+	    sessao.removeAttribute("usuario");
 	    response.sendRedirect("login.jsp");		    	
 	}
 
@@ -52,11 +51,11 @@ public class LoginController extends HttpServlet {
 		//l.add("B");
 		//l.add("C");
 		//l.add("D");
-		if (sessao.logar(cpf, senha)) {
+		if (usuario.logar(cpf, senha)) {
 			//request.setAttribute("lista", l);
-			HttpSession session = request.getSession();
-            session.setAttribute("usuario", sessao);
-			request.setAttribute("usuario", sessao);
+			HttpSession sessao = request.getSession();
+            sessao.setAttribute("usuario", this);
+			request.setAttribute("usuario", this);
 			request.getRequestDispatcher("bem_vindo.jsp").forward(request,response);
         }else {
         	//revisar
@@ -64,6 +63,10 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
+	}
+	
+	public Connection getCn() {
+		return usuario.getCn();
 	}
 
 }
