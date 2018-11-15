@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="model.*" %>
+<%@ page import="controller.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	<title>Bem-vindo!</title>
 </head>
 <body>
-	<% LoginModel usuario = (LoginModel)request.getAttribute("usuario");%>
+	<% LoginController usuario = (LoginController)request.getAttribute("usuario");%>
 	<%@include file="headerSistema.jsp"%>
  	<div class="container-fluid">
       <div class="row">      

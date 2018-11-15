@@ -19,20 +19,21 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Dono</h1>
           </div>
-            <form> 
+            <form action="Cliente.do" method="POST"> 
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Nome completo">                  
+                  <input type="text" class="form-control" placeholder="Nome completo" name="nome">                  
                 </div>
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="CPF">                  
+                  <input type="text" class="form-control" placeholder="CPF" name="cpf">                  
                 </div>
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Endereço">                 
+                  <input type="text" class="form-control" placeholder="Endereço" name="endereco">                 
                 </div>
                 <div class="input-group form-group">
                   <input type="text" class="form-control" placeholder="Telefone">                  
                 </div>               
                 <br>
+                ${message}
                 <div class="form-group">
                   <input type="submit" value="Cadastrar" class="btn btn-lg btn btn-dark">
                 </div>

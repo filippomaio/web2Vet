@@ -19,22 +19,23 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Animal</h1>
           </div>
-           <form> 
+           <form action="Animal.do" method="POST"> 
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Nome do animal">                  
+                  <input type="text" class="form-control" placeholder="Nome do animal" name="nome">                  
                 </div>
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Idade do animal">                  
+                  <input type="text" class="form-control" placeholder="Idade do animal" name="idade">                  
                 </div>
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder=" Tipo do animal">                 
+                  <input type="text" class="form-control" placeholder=" Tipo do animal" name="tipo">                 
                 </div>
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder=" Cor do animal">                  
+                  <input type="text" class="form-control" placeholder=" Cor do animal" name="cor">                  
                 </div>               
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="CPF do dono">                  
+                  <input type="text" class="form-control" placeholder="CPF do dono" name="cpfCliente">                 
                 </div><br>
+                ${message}
                 <div class="form-group">
                   <input type="submit" value="Cadastrar" class="btn btn-lg btn btn-dark">
                 </div>
