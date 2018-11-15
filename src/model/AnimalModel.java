@@ -18,7 +18,7 @@ public class AnimalModel {
     }
 	
 	public boolean criarAnimal(String nome, int idade, String tipo, String cor, int cpfCliente) {
-		String query = "INSERT INTO prontuariobd.medico(nome, idade, tipo, cor, cpfCliente) VALUES (?,?,?,?,?)";
+		String query = "INSERT INTO prontuariobd.animal(nome, idade, tipo, cor, cpfCliente) VALUES (?,?,?,?,?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
