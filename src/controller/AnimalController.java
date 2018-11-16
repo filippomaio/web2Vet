@@ -57,5 +57,22 @@ public class AnimalController extends HttpServlet {
             request.getRequestDispatcher("cadastrarPaciente.jsp").forward(request, response);
         }
 	}
+	
+	public boolean hasAnimal(String nome, int cpfCliente, HttpSession sessao) {
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+        animal = new AnimalModel(usuario.getCn());
+        if(animal.lerAnimal(nome, cpfCliente) != null) {
+        	return true;
+        }
+        return false;
+	}
+	
+	public int getAnimalId(String nome, int cpfCliente, HttpSession sessao) {
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+        animal = new AnimalModel(usuario.getCn());
+        animal = animal.lerAnimal(nome, cpfCliente);
+        return animal.getId();
+	}
+	
 
 }

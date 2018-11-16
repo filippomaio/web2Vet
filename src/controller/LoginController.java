@@ -68,5 +68,9 @@ public class LoginController extends HttpServlet {
 	public Connection getCn() {
 		return usuario.getCn();
 	}
+	
+	public int getCPF() {
+		return usuario.getCPF();
+	}
 
 }

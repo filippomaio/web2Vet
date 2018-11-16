@@ -36,12 +36,45 @@ public class MedicoModel {
 		return false;
 	}
 	
-	public MedicoModel lerMedico(int cpf) {
-		String query = "SELECT * FROM prontuariobd.medico WHERE cpf = (?)";
+	public MedicoModel lerMedico(int matricula) {
+		String query = "SELECT * FROM prontuariobd.medico WHERE matricula = (?)";
         
         try{
             PreparedStatement ps = cn.prepareStatement(query);
-            ps.setInt(1, cpf);
+            ps.setInt(1, matricula);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            this.id = rs.getInt("id");
+            this.nome = rs.getString("nome");
+            this.cpf = rs.getInt("cpf");
+            this.senha = rs.getString("senha");
+            this.matricula = rs.getInt("matricula");
+            this.cargo = rs.getInt("cargo");
+            
+            System.out.println("Id: " + rs.getInt("id"));
+            System.out.println("Nome: " + rs.getString("nome"));
+            System.out.println("CPF: " + rs.getInt("cpf"));
+            System.out.println("Senha: " + rs.getString("senha"));
+            System.out.println("matricula: " + rs.getInt("matricula"));
+            System.out.println("cargo: " + rs.getInt("cargo"));
+            return this;
+            
+        }catch(SQLException ex){
+            System.out.println("Um erro aconteceu: " + ex);
+        }
+        
+        
+		return null;
+	}
+	
+	public MedicoModel lerMedico(int matricula, int cargo) {
+		String query = "SELECT * FROM prontuariobd.medico WHERE matricula = (?) and cargo = (?)";
+        
+        try{
+            PreparedStatement ps = cn.prepareStatement(query);
+            ps.setInt(1, matricula);
+            ps.setInt(2, cargo);
             ResultSet rs = ps.executeQuery();
             rs.next();
             
@@ -100,6 +133,10 @@ public class MedicoModel {
             System.out.println("Um erro aconteceu: " + ex);
         }
 		return false;
+	}
+	
+	public int getCPF() {
+		return this.cpf;
 	}
 	
 }

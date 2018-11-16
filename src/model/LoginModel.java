@@ -89,4 +89,8 @@ public class LoginModel {
         return cn;
     }
     
+    public int getCPF() {
+    	return cpf;
+    }
+    
 }

@@ -19,29 +19,29 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Consulta</h1>
           </div>
-            <form> 
+            <form action="Prontuario.do" method="POST"> 
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Nome do animal">                  
+                  <input type="text" class="form-control" placeholder="Nome do animal" name="nome">                  
                 </div>
                 <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Motivo da consulta">                
+                  <input type="text" class="form-control" placeholder="CPF do dono" name="cpfCliente">                  
+                </div>
+                <div class="input-group form-group">
+                  <input type="text" class="form-control" placeholder="Motivo da consulta" name="motivo">                
                 </div>
                 <div class="form-group">
                   <label for="tratamento">Tratamento:</label>
-                  <textarea class="form-control" id="tratamento" rows="3"></textarea>
-                </div>
-                <label for="tratamento">Data do atendimento:</label>
-                <div class="input-group form-group">
-                  <input type="date" class="form-control">                  
+                  <textarea class="form-control" id="tratamento" rows="3" name="tratamento"></textarea>
                 </div>
                 <label for="tratamento">Data do retorno:</label>
                 <div class="input-group form-group">
-                  <input type="date" class="form-control">                  
+                  <input type="date" class="form-control" name="dataRetorno">                  
                 </div> 
                 <div class="input-group form-group">
-                  <input type="text" class="form-control " placeholder="Matrícula do professor responsável">                 
+                  <input type="text" class="form-control " placeholder="Matrícula do professor responsável" name="matriculaProf">                 
                 </div>  
                 <br>
+                ${message}
                 <div class="form-group">
                   <input type="submit" value="Salvar" class="btn btn-lg btn btn-dark">
                 </div>
