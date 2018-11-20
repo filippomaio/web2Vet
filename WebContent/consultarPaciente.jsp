@@ -20,30 +20,39 @@
             <h1 class="h2">Consulta</h1>
           </div>
             <form action="Prontuario.do" method="POST"> 
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Nome do animal" name="nome">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder="Nome do animal" name="nome" id="nomeAnimalConPaciente" required>                  
+                  <span class="errorText" id="errorNomeAnimalConPaciente"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="CPF do dono" name="cpfCliente">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder="CPF do dono" data-mask="000.000.000-00" id="cpfDonoConPaciente" name="cpfCliente" required>                  
+                  <span class="errorText" id="errorCPFDonoConPaciente"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Motivo da consulta" name="motivo">                
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder="Motivo da consulta" id="motivoConPaciente" name="motivo" required>                
+                  <span class="errorText" id="errorMotivoConPaciente"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-label-group mt-3">
                   <label for="tratamento">Tratamento:</label>
-                  <textarea class="form-control" id="tratamento" rows="3" name="tratamento"></textarea>
+                  <textarea class="form-control" id="tratamentoConPaciente" rows="3" name="tratamento" required></textarea>
+                  <span class="errorText" id="errorTratamentoConPaciente"></span>
                 </div>
-                <label for="tratamento">Data do retorno:</label>
+                <label class="mt-3" for="tratamento">Data do retorno:</label>
                 <div class="input-group form-group">
-                  <input type="date" class="form-control" name="dataRetorno">                  
+                  <input type="date" class="form-control" id="dataRetornoConPaciente" name="dataRetorno" required>                  
+                  <span class="errorText" id="errorRetornoConPaciente"></span>
                 </div> 
-                <div class="input-group form-group">
-                  <input type="text" class="form-control " placeholder="Matrícula do professor responsável" name="matriculaProf">                 
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" id="matriculaProfessorConPaciente" placeholder="Matrícula do professor responsável" name="matriculaProf" required>                 
+                  <span class="errorText" id="errorMatriculaProfessorConPaciente"></span>
                 </div>  
                 <br>
-                ${message}
-                <div class="form-group">
-                  <input type="submit" value="Salvar" class="btn btn-lg btn btn-dark">
+                <div class="mensagens_erros">
+                	 ${message}
+                </div>   
+                <div class="form-label-group mt-3">
+                  <input type="submit" value="Salvar" id="consultarPaciente" class="btn btn-lg btn btn-dark">
+                  <span class="errorText" id="errorSubmitConsultarPaciente"></span>
                 </div>
           	</form>
           
@@ -59,6 +68,8 @@
     <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="bootstrap/assets/js/vendor/popper.min.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap/dist/js/mask.min.js"></script>
+    <script src="js/validadorConPaciente.js"></script>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
       feather.replace()

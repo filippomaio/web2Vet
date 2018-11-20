@@ -19,16 +19,8 @@
 
  <nav  class="navbar navbar-light fixed-top bg-dark flex-md-nowrap p-0 shadow" >
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" style="background-color: black;">
-        <img src="imagens/HOSPITAL2.png" width="190" height="40" class="d-inline-block align-top" alt="">
-      </a>
-      <form class="form-inline">
-        <div class="input-group">
-          <input type="text" class="form-control col-xs-4"  placeholder="Pesquisar..." aria-label="pesquisa" aria-describedby="pesquisa">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="pesquisa"><span data-feather="search"></span></span>
-          </div>
-        </div>
-      </form>      
+        <img src="imagens/HOSPITAL2.png" width="200" height="35" class="d-inline-block align-top" alt="">
+      </a> 
       <div class="btn-group botao_drop">
         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          <span data-feather="user"></span>Minha conta
@@ -48,6 +40,8 @@
     <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="bootstrap/assets/js/vendor/popper.min.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap/dist/js/mask.min.js"></script>
+    <script src="js/validador.js"></script>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
       feather.replace()

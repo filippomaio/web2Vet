@@ -71,7 +71,7 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="gerarProntuario.html">
+                <a class="nav-link" href="gerarProntuario.jsp">
                   <span data-feather="file-text"></span>
                   Gerar prontuário
                 </a>
@@ -82,13 +82,7 @@
             </h6>
             <ul class="nav flex-column mb-2">
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Meus relatórios
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="proximosPacientes.jsp">
                   <span data-feather="file-text"></span>
                   Próximos pacientes
                 </a>

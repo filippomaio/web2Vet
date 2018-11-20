@@ -8,7 +8,7 @@
 	<!-- icon de patinhas lá de cima -->
 	<link rel=" icon" href="bootstrap/favicon.ico"  type="image/x-icon">
 	<link rel=" shortcut icon" href="bootstrap/favicon.ico"  type="image/x-icon">
-	<title>Cadastreo Dono</title>
+	<title>Cadastro Dono</title>
 </head>
 <body>
 	<%@include file="headerSistema.jsp"%>
@@ -20,22 +20,29 @@
             <h1 class="h2">Cadastrar Dono</h1>
           </div>
             <form action="Cliente.do" method="POST"> 
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Nome completo" name="nome">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" id="nomeDonoCadDono" placeholder="Nome completo" name="nome">                  
+                  <span class="errorText" id="errorNomeDonoCadDono"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="CPF" name="cpf">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" id="cpfDonoCadDono" data-mask="000.000.000-00" placeholder="CPF" name="cpf">                  
+                  <span class="errorText" id="errorCPFDonoCadDono"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Endereço" name="endereco">                 
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" id="enderecoDonoCadDono" placeholder="Endereço" name="endereco">                 
+                  <span class="errorText" id="errorEnderecoDonoCadDono"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Telefone">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" id="telefoneDonoCadDono" placeholder="Telefone">                  
+                  <span class="errorText" id="errorTelefoneDonoCadDono"></span>
                 </div>               
                 <br>
-                ${message}
-                <div class="form-group">
-                  <input type="submit" value="Cadastrar" class="btn btn-lg btn btn-dark">
+               <div class="mensagens_erros">
+                	 ${message}
+               </div> 
+                <div class="form-label-group mt-3">
+                  <input type="submit" value="Cadastrar" id="CadastroDono" class="btn btn-lg btn btn-dark">
+                  <span class="errorText" id="errorSubmitCadDono"></span>
                 </div>
             </form>
           
@@ -51,6 +58,8 @@
     <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="bootstrap/assets/js/vendor/popper.min.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap/dist/js/mask.min.js"></script>
+    <script src="js/validadorCadCliente.js"></script>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <script>
       feather.replace()

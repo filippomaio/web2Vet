@@ -18,10 +18,10 @@ align-content: center;
 }
 
 .card{
-height: 372px;
+height: 400px;
 margin-top: auto;
 margin-bottom: auto;
-width: 400px;
+width: 420px;
 background-color:rgba(0, 0, 0, 0.4) !important;
 }
 
@@ -88,4 +88,8 @@ background-color: grey;
 .links a{
 margin-left: 4px;
 color: white;
+}
+.mensagens_erros {
+	color: red;
+	font-weight: bold;
 }

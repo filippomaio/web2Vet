@@ -21,7 +21,7 @@
 </head>
 <body class="text-center ">
 	<%@include file="headerInicial.jsp"%>
-	<br><br>
+	<br>
 	<div class="container">
         <div class="d-flex justify-content-center h-100">
           <div class="card">
@@ -41,14 +41,16 @@
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                   </div>
                   <input type="password" class="form-control" placeholder="Senha" name="senha">
+                </div><br>
+                <div class="mensagens_erros">
+                	${message} 
                 </div>
-                <br>
                 <div class="form-group">
                   <input type="submit" value="Entrar" class="btn btn-lg btn btn-dark  login_btn">
                 </div>
               </form>
             </div>
-            ${message}
+           
             <div class="card-footer">
               <div class="d-flex justify-content-center links">
                Não possui cadastro?<a href="cadastro.jsp">Cadastre-se</a>

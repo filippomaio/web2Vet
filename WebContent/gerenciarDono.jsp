@@ -20,7 +20,7 @@
             <h1 class="h2">Donos</h1>
           </div>
           <div class="table-responsive">
-            <table class="table table-striped table-sm">
+            <table class="table table-striped table-sm text-center">
               <thead>
                 <tr>
                   <th>Nome</th>
@@ -33,68 +33,68 @@
                 <tr>
                   <td>Angelo</td>
                   <td>95429218866</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Agnes</td>
                   <td>16301178700</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Beatriz</td>
                   <td>16301178700</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Carla</td>
                   <td>13698978711</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Daniel</td>
                   <td>98859289800</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Filippo</td>
                   <td>000000000000</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Julia</td>
                   <td>11122233300</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Marcello</td>
                   <td>222333444555</td>                  
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Lucas</td>
                   <td>000000000000</td>                  
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Nathan</td>
                   <td>78722260633</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
                 <tr>
                   <td>Paula</td>
                   <td>29217862200</td>
-                  <td><a href="">Visualizar</a></td>
-                  <td><a href="">Gerenciar</a></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
                 </tr>
               </tbody>
             </table>

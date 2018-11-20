@@ -20,24 +20,32 @@
             <h1 class="h2">Cadastrar Animal</h1>
           </div>
            <form action="Animal.do" method="POST"> 
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Nome do animal" name="nome">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder="Nome do animal" id="nomeAnimalCadPaciente" name="nome">                  
+                  <span class="errorText" id="errorNomeAnimalCadPaciente"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="Idade do animal" name="idade">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder="Idade do animal" id="idadeAnimalCadPaciente" data-mask="00" name="idade">                  
+               	  <span class="errorText" id="errorIdadeAnimalCadPaciente"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder=" Tipo do animal" name="tipo">                 
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder=" Tipo do animal" id="tipoAnimalCadPaciente" name="tipo">                 
+                  <span class="errorText" id="errorTipoAnimalCadPaciente"></span>
                 </div>
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder=" Cor do animal" name="cor">                  
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder=" Cor do animal" id="corAnimalCadPaciente" name="cor">                  
+                  <span class="errorText" id="errorCorAnimalCadPaciente"></span>
                 </div>               
-                <div class="input-group form-group">
-                  <input type="text" class="form-control" placeholder="CPF do dono" name="cpfCliente">                 
+                <div class="form-label-group mt-3">
+                  <input type="text" class="form-control" placeholder="CPF do dono" id="cpfClienteCadPaciente" name="cpfCliente" data-mask="000.000.000-00">                 
+                  <span class="errorText" id="errorCPFDonoCadPaciente"></span>
                 </div><br>
-                ${message}
-                <div class="form-group">
-                  <input type="submit" value="Cadastrar" class="btn btn-lg btn btn-dark">
+                <div class="mensagens_erros">
+                	 ${message}
+                </div>               
+                <div class="form-label-group mt-3">
+                  <input type="submit" value="Cadastrar" id="cadastroPaciente" class="btn btn-lg btn btn-dark">
+                  <span class="errorText" id="errorSubmitCadPaciente"></span>
                 </div>
            </form>
           
@@ -52,7 +60,10 @@
     <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="bootstrap/assets/js/vendor/popper.min.js"></script>
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bootstrap/dist/js/mask.min.js"></script>
+    <script src="js/validadorCadPaciente.js"></script>
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    
     <script>
       feather.replace()
     </script>

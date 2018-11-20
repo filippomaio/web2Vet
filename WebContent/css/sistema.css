@@ -1,7 +1,10 @@
 main{
 margin-top: 4%;
 }
-a{
+.btn a{
+	color: white;
+}
+a {
 	color: black;
 }
 .sidebar-sticky {
@@ -44,4 +47,8 @@ a{
     margin-right: 10px;
     padding: 0px;
     text-align: center;
+}
+.mensagens_erros {
+	color: red;
+	font-weight: bold;
 }
