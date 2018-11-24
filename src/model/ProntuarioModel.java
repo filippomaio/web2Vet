@@ -8,8 +8,8 @@ public class ProntuarioModel {
 	
 	private int id;
 	private int idAnimal;
-	private int cpfAluno;
-	private int cpfProfessor;
+	private String cpfAluno;
+	private String cpfProfessor;
 	private String motivo;
 	private String tratamento;
 	private Date dataAtendimento;
@@ -19,14 +19,14 @@ public class ProntuarioModel {
         this.cn = cn;
     }
 	
-	public boolean criarProntuario(int idAnimal, int cpfAluno, int cpfProfessor, String motivo, String tratamento, Date dataAtendimento, Date dataRetorno) {
+	public boolean criarProntuario(int idAnimal, String cpfAluno, String cpfProfessor, String motivo, String tratamento, Date dataAtendimento, Date dataRetorno) {
 		String query = "INSERT INTO prontuariobd.prontuario(idAnimal, cpfAluno, cpfProfessor, motivo, tratamento, dataAtendimento, dataRetorno) VALUES (?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
             ps.setInt(1, idAnimal);
-            ps.setInt(2, cpfAluno);
-            ps.setInt(3, cpfProfessor);
+            ps.setString(2, cpfAluno);
+            ps.setString(3, cpfProfessor);
             ps.setString(4, motivo);
             ps.setString(5, tratamento);
             ps.setDate(6, dataAtendimento);
@@ -52,8 +52,8 @@ public class ProntuarioModel {
             
             this.id = rs.getInt("id");
             this.idAnimal = rs.getInt("idAnimal");
-            this.cpfAluno = rs.getInt("cpfAluno");
-            this.cpfProfessor = rs.getInt("cpfProfessor");
+            this.cpfAluno = rs.getString("cpfAluno");
+            this.cpfProfessor = rs.getString("cpfProfessor");
             this.motivo = rs.getString("motivo");
             this.tratamento = rs.getString("tratamento");
             this.dataAtendimento = rs.getDate("dataAtendimento");
@@ -61,8 +61,8 @@ public class ProntuarioModel {
             
             System.out.println("Id: " + rs.getInt("id"));
             System.out.println("IdAnimal: " + rs.getInt("idAnimal"));
-            System.out.println("CPFAluno: " + rs.getInt("cpfAluno"));
-            System.out.println("CPFProfessor: " + rs.getInt("cpfProfessor"));
+            System.out.println("CPFAluno: " + rs.getString("cpfAluno"));
+            System.out.println("CPFProfessor: " + rs.getString("cpfProfessor"));
             System.out.println("Motivo: " + rs.getString("motivo"));
             System.out.println("Tratamento: " + rs.getString("tratamento"));
             System.out.println("DataAtendimento: " + rs.getDate("dataAtendimento"));
@@ -77,14 +77,14 @@ public class ProntuarioModel {
 		return null;
 	}
 	
-	public boolean atualizarProntuario(int id, int idAnimal, int cpfAluno, int cpfProfessor, String motivo, String tratamento, Date dataAtendimento, Date dataRetorno) {
+	public boolean atualizarProntuario(int id, int idAnimal, String cpfAluno, String cpfProfessor, String motivo, String tratamento, Date dataAtendimento, Date dataRetorno) {
 		String query = "UPDATE prontuariobd.prontuario SET idAnimal = ?, cpfAluno = ?, cpfProfessor = ?, motivo = ?, tratamento = ?, dataAtendimento = ?, dataRetorno = ? WHERE prontuariobd.prontuario.id = (?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
             ps.setInt(1, idAnimal);
-            ps.setInt(2, cpfAluno);
-            ps.setInt(3, cpfProfessor);
+            ps.setString(2, cpfAluno);
+            ps.setString(3, cpfProfessor);
             ps.setString(4, motivo);
             ps.setString(5, tratamento);
             ps.setDate(6, dataAtendimento);

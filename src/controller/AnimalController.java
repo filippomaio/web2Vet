@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,13 +33,24 @@ public class AnimalController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String acao = request.getParameter("acao");
+		if (acao.equals("visualizar")){
+			//cadastrarAnimal(request,response);
+			System.out.println("OK GET");
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String acao = request.getParameter("acao");
+		if (acao.equals("cadastrar")){
+			cadastrarAnimal(request,response);
+		}
+	}
+	
+	protected void cadastrarAnimal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         animal = new AnimalModel(usuario.getCn());
@@ -45,7 +59,7 @@ public class AnimalController extends HttpServlet {
         int idade = Integer.parseInt(request.getParameter("idade"));
         String tipo = request.getParameter("tipo");
         String cor = request.getParameter("cor");
-        int cpfCliente = Integer.parseInt(request.getParameter("cpfCliente"));
+        String cpfCliente = request.getParameter("cpfCliente");
         
         ClienteController cliente = new ClienteController();
         if (cliente.hasCliente(cpfCliente,sessao)) {
@@ -58,7 +72,7 @@ public class AnimalController extends HttpServlet {
         }
 	}
 	
-	public boolean hasAnimal(String nome, int cpfCliente, HttpSession sessao) {
+	public boolean hasAnimal(String nome, String cpfCliente, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         animal = new AnimalModel(usuario.getCn());
         if(animal.lerAnimal(nome, cpfCliente) != null) {
@@ -67,12 +81,39 @@ public class AnimalController extends HttpServlet {
         return false;
 	}
 	
-	public int getAnimalId(String nome, int cpfCliente, HttpSession sessao) {
+	public int getAnimalId(String nome, String cpfCliente, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         animal = new AnimalModel(usuario.getCn());
         animal = animal.lerAnimal(nome, cpfCliente);
         return animal.getId();
 	}
 	
+	public void carregarAnimais(HttpServletRequest request) {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		List<AnimalModel> animais = new ArrayList<AnimalModel>();
+		animal = new AnimalModel(usuario.getCn());
+		animais = animal.getAnimais();
+		ArrayList<String> idAnimais = new ArrayList<>();
+		ArrayList<String> nomeAnimais = new ArrayList<>();
+		ArrayList<String> idadeAnimais = new ArrayList<>();
+		ArrayList<String> tipoAnimais = new ArrayList<>();
+		ArrayList<String> corAnimais = new ArrayList<>();
+		ArrayList<String> cpfClientesAnimais = new ArrayList<>();
+		for(int i=0;i<animais.size();i++) {
+			idAnimais.add(Integer.toString(animais.get(i).getId()));
+			nomeAnimais.add(animais.get(i).getNome());
+			idadeAnimais.add(Integer.toString(animais.get(i).getIdade()));
+			tipoAnimais.add(animais.get(i).getTipo());
+			corAnimais.add(animais.get(i).getCor());
+			cpfClientesAnimais.add(animais.get(i).getCpfCliente());
+		}
+		sessao.setAttribute("idAnimais", idAnimais);
+		sessao.setAttribute("nomeAnimais", nomeAnimais);
+		sessao.setAttribute("idadeAnimais", idadeAnimais);
+		sessao.setAttribute("tipoAnimais", tipoAnimais);
+		sessao.setAttribute("corAnimais", corAnimais);
+		sessao.setAttribute("cpfClientesAnimais", cpfClientesAnimais);
+	}
 
 }

@@ -41,12 +41,19 @@ public class ProntuarioController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String acao = request.getParameter("acao");
+		if (acao.equals("cadastrar")){
+			cadastrarProntuario(request,response);
+		}
+	}
+	
+	protected void cadastrarProntuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         prontuario = new ProntuarioModel(usuario.getCn());
         
         String nome = request.getParameter("nome");
-        int cpfCliente = Integer.parseInt(request.getParameter("cpfCliente"));
+        String cpfCliente = request.getParameter("cpfCliente");
         String motivo = request.getParameter("motivo");
         String tratamento = request.getParameter("tratamento");
         Date dataAtendimento = new Date(new java.util.Date().getTime());
@@ -59,7 +66,7 @@ public class ProntuarioController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}		
-        int matriculaProf = Integer.parseInt(request.getParameter("matriculaProf"));
+        String matriculaProf = request.getParameter("matriculaProf");
         
         //validar Cliente (cpf)       
         ClienteController cliente = new ClienteController();
@@ -72,8 +79,8 @@ public class ProntuarioController extends HttpServlet {
         
         if ((cliente.hasCliente(cpfCliente,sessao)) && (animal.hasAnimal(nome,cpfCliente,sessao)) && (medico.hasProfessor(matriculaProf,sessao))) {
         	int idAnimal = animal.getAnimalId(nome, cpfCliente, sessao);
-        	int cpfAluno = usuario.getCPF();
-        	int cpfProfessor = medico.getCPF(matriculaProf, sessao);
+        	String cpfAluno = usuario.getCPF();
+        	String cpfProfessor = medico.getCPF(matriculaProf, sessao);
         	prontuario.criarProntuario(idAnimal, cpfAluno, cpfProfessor, motivo, tratamento, dataAtendimento, dataRetorno);
         	request.setAttribute("message", "Prontuário cadastrado com sucesso!");
             request.getRequestDispatcher("consultarPaciente.jsp").forward(request, response);

@@ -13,9 +13,9 @@ public class LoginModel {
     
     private int id;
     private String nome;
-    private int cpf;
+    private String cpf;
     private String senha;
-    private int matricula;
+    private String matricula;
     private int cargo;
     
 	
@@ -68,9 +68,9 @@ public class LoginModel {
             
             this.id = rs.getInt("id");
             this.nome = rs.getString("nome");
-            this.cpf = rs.getInt("cpf");
+            this.cpf = rs.getString("cpf");
             this.senha = rs.getString("senha");
-            this.matricula = rs.getInt("matricula");
+            this.matricula = rs.getString("matricula");
             this.cargo = rs.getInt("cargo");
             
             System.out.println("Usuário: " + this.nome);
@@ -89,7 +89,7 @@ public class LoginModel {
         return cn;
     }
     
-    public int getCPF() {
+    public String getCPF() {
     	return cpf;
     }
     

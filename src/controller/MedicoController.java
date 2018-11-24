@@ -39,7 +39,11 @@ public class MedicoController extends HttpServlet {
 		// TODO Auto-generated method stub
 	}
 	
-	public boolean hasMedico(int matricula, HttpSession sessao) {
+	protected void cadastrarMedico(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO
+	}
+	
+	public boolean hasMedico(String matricula, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         medico = new MedicoModel(usuario.getCn());
         if(medico.lerMedico(matricula) != null) {
@@ -49,7 +53,7 @@ public class MedicoController extends HttpServlet {
 	}
 	
 	//1 = Professor , 2 = Aluno
-	public boolean hasProfessor(int matricula, HttpSession sessao) {
+	public boolean hasProfessor(String matricula, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         medico = new MedicoModel(usuario.getCn());
         if(medico.lerMedico(matricula,1) != null) {
@@ -59,7 +63,7 @@ public class MedicoController extends HttpServlet {
 	}
 	
 	//1 = Professor , 2 = Aluno
-	public boolean hasAluno(int matricula, HttpSession sessao) {
+	public boolean hasAluno(String matricula, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         medico = new MedicoModel(usuario.getCn());
         if(medico.lerMedico(matricula,2) != null) {
@@ -68,7 +72,7 @@ public class MedicoController extends HttpServlet {
         return false;
 	}
 	
-	public int getCPF(int matricula, HttpSession sessao) {
+	public String getCPF(String matricula, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         medico = new MedicoModel(usuario.getCn());
         medico = medico.lerMedico(matricula);

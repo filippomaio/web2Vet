@@ -56,6 +56,13 @@ public class LoginController extends HttpServlet {
 			HttpSession sessao = request.getSession();
             sessao.setAttribute("usuario", this);
 			request.setAttribute("usuario", this);
+			
+			//Carregar Listas
+			ClienteController cliente = new ClienteController();
+			cliente.carregarClientes(request);
+			AnimalController animal = new AnimalController();
+			animal.carregarAnimais(request);
+			
 			request.getRequestDispatcher("bem_vindo.jsp").forward(request,response);
         }else {
         	//revisar
@@ -69,7 +76,7 @@ public class LoginController extends HttpServlet {
 		return usuario.getCn();
 	}
 	
-	public int getCPF() {
+	public String getCPF() {
 		return usuario.getCPF();
 	}
 

@@ -1,15 +1,14 @@
 var nomeDonoCadCliente = false;
 var CPFDonoCadCliente = false;
 var EnderecoDonoCadCliente = false;
-var telefoneDonoCadCliente = false;
 
 //validacao do nome do animal CadCliente
 document.getElementById("nomeDonoCadDono").addEventListener("blur", function(){
     var nome = document.getElementById("nomeDonoCadDono").value;
-    var RegExp = /^[a-zA-ZéúíóáÉÚÍÓÁèùìòàçÇÈÙÌÒÀõãñÕÃÑêûîôâÊÛÎÔÂëÿüïöäËYÜÏÖÄ\-\ \s]+$/;
+    var RegExp = /^[a-zA-Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½\-\ \s]+$/;
     if (RegExp.test(nome) == false) {
         //$(this).focus();
-        $("#errorNomeDonoCadDono").text("Por favor, insira um nome válido");
+        $("#errorNomeDonoCadDono").text("Por favor, insira um nome vï¿½lido");
         $(this).addClass("errorInput");
         
         nomeDonoCadCliente = false;
@@ -22,7 +21,7 @@ document.getElementById("nomeDonoCadDono").addEventListener("blur", function(){
 //validacao do CPF do cliente CadCliente
 document.getElementById("cpfDonoCadDono").addEventListener("blur", function(){
     if (!TestaCPF($(this).val())) {
-        $("#errorCPFDonoCadDono").text("Por favor, insira um CPF válido");
+        $("#errorCPFDonoCadDono").text("Por favor, insira um CPF vï¿½lido");
         $(this).addClass("errorInput");
         
         CPFDonoCadCliente = false;
@@ -32,10 +31,10 @@ document.getElementById("cpfDonoCadDono").addEventListener("blur", function(){
     } 
 });
 
-//validacao do endereço do cliente CadCliente
+//validacao do endereï¿½o do cliente CadCliente
 document.getElementById("enderecoDonoCadDono").addEventListener("blur", function(){
 	if ($(this).val().length < 4) {
-        $("#errorEnderecoDonoCadDono").text("Por favor, insira um endereço válido");
+        $("#errorEnderecoDonoCadDono").text("Por favor, insira um endereï¿½o vï¿½lido");
         $(this).addClass("errorInput");
         
         EnderecoDonoCadCliente = false;
@@ -45,34 +44,9 @@ document.getElementById("enderecoDonoCadDono").addEventListener("blur", function
     } 
 });
 
-//Máscara do telefone
-var SPMaskBehavior = function (val) {
-   return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
- },
- spOptions = {
-   onKeyPress: function(val, e, field, options) {
-       field.mask(SPMaskBehavior.apply({}, arguments), options);
-     }
- };
- 
- $('#telefoneDonoCadDono').mask(SPMaskBehavior, spOptions);
- 
-//Validação do telefone do cliente CadCliente
- $('#telefoneDonoCadDono').blur(function(){
-     if($(this).val().length < 14){
-         //$(this).focus();
-         $("#errorTelefoneDonoCadDono").text("Por favor, digite um número de telefone válido");
-         $(this).addClass("errorInput");
-         telefoneDonoCadCliente = false;
-     }else{
-         $("#errorTelefoneDonoCadDono").text("");
-         telefoneDonoCadCliente = true;
-     }
- });
-
 //disparo do botao CadCliente
  document.getElementById("CadastroDono").addEventListener("click", function(event){
-     if(nomeDonoCadCliente && CPFDonoCadCliente && EnderecoDonoCadCliente && telefoneDonoCadCliente){  
+     if(nomeDonoCadCliente && CPFDonoCadCliente && EnderecoDonoCadCliente){  
          $("#errorSubmitCadDono").text("");
                              
      }else{

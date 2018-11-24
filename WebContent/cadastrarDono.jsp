@@ -19,7 +19,7 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Dono</h1>
           </div>
-            <form action="Cliente.do" method="POST"> 
+            <form action="Cliente.do?acao=cadastrar" method="POST"> 
                 <div class="form-label-group mt-3">
                   <input type="text" class="form-control" id="nomeDonoCadDono" placeholder="Nome completo" name="nome">                  
                   <span class="errorText" id="errorNomeDonoCadDono"></span>
@@ -31,10 +31,6 @@
                 <div class="form-label-group mt-3">
                   <input type="text" class="form-control" id="enderecoDonoCadDono" placeholder="Endereço" name="endereco">                 
                   <span class="errorText" id="errorEnderecoDonoCadDono"></span>
-                </div>
-                <div class="form-label-group mt-3">
-                  <input type="text" class="form-control" id="telefoneDonoCadDono" placeholder="Telefone">                  
-                  <span class="errorText" id="errorTelefoneDonoCadDono"></span>
                 </div>               
                 <br>
                <div class="mensagens_erros">
@@ -44,8 +40,7 @@
                   <input type="submit" value="Cadastrar" id="CadastroDono" class="btn btn-lg btn btn-dark">
                   <span class="errorText" id="errorSubmitCadDono"></span>
                 </div>
-            </form>
-          
+            </form> 
           
         </main>
       </div>

@@ -19,13 +19,13 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Consulta</h1>
           </div>
-            <form action="Prontuario.do" method="POST"> 
+            <form action="Prontuario.do?acao=cadastrar" method="POST"> 
                 <div class="form-label-group mt-3">
                   <input type="text" class="form-control" placeholder="Nome do animal" name="nome" id="nomeAnimalConPaciente" required>                  
                   <span class="errorText" id="errorNomeAnimalConPaciente"></span>
                 </div>
                 <div class="form-label-group mt-3">
-                  <input type="text" class="form-control" placeholder="CPF do dono" data-mask="000.000.000-00" id="cpfDonoConPaciente" name="cpfCliente" required>                  
+                  <input type="text" class="form-control" placeholder="CPF do dono" id="cpfDonoConPaciente" data-mask="000.000.000-00" name="cpfCliente" required>                  
                   <span class="errorText" id="errorCPFDonoConPaciente"></span>
                 </div>
                 <div class="form-label-group mt-3">
@@ -39,7 +39,7 @@
                 </div>
                 <label class="mt-3" for="tratamento">Data do retorno:</label>
                 <div class="input-group form-group">
-                  <input type="date" class="form-control" id="dataRetornoConPaciente" name="dataRetorno" required>                  
+                  <input type="date" class="form-control" id="dataRetornoConPaciente" name="dataRetorno">                  
                   <span class="errorText" id="errorRetornoConPaciente"></span>
                 </div> 
                 <div class="form-label-group mt-3">

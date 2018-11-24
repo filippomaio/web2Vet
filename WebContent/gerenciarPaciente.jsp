@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,72 +31,23 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Amora</td>
-                  <td>95429218866</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
+				<%
+				List listaIdAnimal = (List)session.getAttribute("idAnimais");
+  				List listaNomeAnimal = (List)session.getAttribute("nomeAnimais");
+  				List listaCpfCliente = (List)session.getAttribute("cpfClientesAnimais");
+  				for(int i = 0; i < listaIdAnimal.size(); i++) {
+  					String idAnimal = listaIdAnimal.get(i).toString();
+  					String nomeAnimal = listaNomeAnimal.get(i).toString();
+    				String cpfCliente = listaCpfCliente.get(i).toString();
+ 				%>
+ 				<tr>
+                  <td><%=nomeAnimal%></td>
+                  <td><%=cpfCliente%></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=visualizar&idAnimal=<%=idAnimal%>">Visualizar</a></button></td> 
                   <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Astolfo</td>
-                  <td>16301178700</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Berlim</td>
-                  <td>16301178700</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Cebolinha</td>
-                  <td>13698978711</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Dory</td>
-                  <td>98859289800</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Fred</td>
-                  <td>000000000000</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Joca</td>
-                  <td>11122233300</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Klose</td>
-                  <td>222333444555</td>                  
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Luke</td>
-                  <td>000000000000</td>                  
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Nutellinha</td>
-                  <td>78722260633</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Pandora</td>
-                  <td>29217862200</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
+                </tr>															
+ 				<% } //fecha for
+				%>
               </tbody>
             </table>
           </div>          

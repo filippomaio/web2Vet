@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,18 +40,22 @@ public class ClienteController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String acao = request.getParameter("acao");
+		if (acao.equals("cadastrar")){
+			cadastrarCliente(request,response);
+		}
+	}
+	protected void cadastrarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
 		cliente = new ClienteModel(usuario.getCn());
         
         String nome = request.getParameter("nome");
-        int cpf = Integer.parseInt(request.getParameter("cpf"));
+        String cpf = request.getParameter("cpf");
         String endereco = request.getParameter("endereco");
         
-        ClienteController cliente = new ClienteController();
-        if (!cliente.hasCliente(cpf,sessao)) {        	
-        	this.cliente.criarCliente(nome, cpf, endereco);
+        if (!hasCliente(cpf,sessao)) {        	
+        	cliente.criarCliente(nome, cpf, endereco);
         	request.setAttribute("message", "Cliente castrado com sucesso!");
             request.getRequestDispatcher("cadastrarDono.jsp").forward(request, response);
         }else {
@@ -57,7 +64,7 @@ public class ClienteController extends HttpServlet {
         }
 	}
 	
-	public boolean hasCliente(int cpf, HttpSession sessao) {
+	public boolean hasCliente(String cpf, HttpSession sessao) {
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
         cliente = new ClienteModel(usuario.getCn());
         if(cliente.lerCliente(cpf) != null) {
@@ -66,4 +73,23 @@ public class ClienteController extends HttpServlet {
         return false;
 	}
 
+	public void carregarClientes(HttpServletRequest request) {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		List<ClienteModel> clientes = new ArrayList<ClienteModel>();
+		cliente = new ClienteModel(usuario.getCn());
+		clientes = cliente.getClientes();
+		ArrayList<String> idClientes = new ArrayList<>();
+		ArrayList<String> cpfClientes = new ArrayList<>();
+		ArrayList<String> nomeClientes = new ArrayList<>();
+		for(int i=0;i<clientes.size();i++) {
+			idClientes.add(Integer.toString(clientes.get(i).getId()));
+			cpfClientes.add(clientes.get(i).getCpf());
+			nomeClientes.add(clientes.get(i).getNome());
+		}
+		sessao.setAttribute("idClientes", idClientes);
+		sessao.setAttribute("cpfClientes", cpfClientes);
+		sessao.setAttribute("nomeClientes", nomeClientes);
+	}
+	
 }

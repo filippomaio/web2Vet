@@ -19,7 +19,7 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Cadastrar Animal</h1>
           </div>
-           <form action="Animal.do" method="POST"> 
+           <form action="Animal.do?acao=cadastrar" method="POST"> 
                 <div class="form-label-group mt-3">
                   <input type="text" class="form-control" placeholder="Nome do animal" id="nomeAnimalCadPaciente" name="nome">                  
                   <span class="errorText" id="errorNomeAnimalCadPaciente"></span>
@@ -37,7 +37,7 @@
                   <span class="errorText" id="errorCorAnimalCadPaciente"></span>
                 </div>               
                 <div class="form-label-group mt-3">
-                  <input type="text" class="form-control" placeholder="CPF do dono" id="cpfClienteCadPaciente" name="cpfCliente" data-mask="000.000.000-00">                 
+                  <input type="text" class="form-control" placeholder="CPF do dono" id="cpfClienteCadPaciente" data-mask="000.000.000-00" name="cpfCliente">                 
                   <span class="errorText" id="errorCPFDonoCadPaciente"></span>
                 </div><br>
                 <div class="mensagens_erros">

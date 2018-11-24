@@ -8,24 +8,24 @@ public class MedicoModel {
 	
 	private int id;
 	private String nome;
-	private int cpf;
+	private String cpf;
 	private String senha;
-	private int matricula;
+	private String matricula;
 	private int cargo;
 	
 	public MedicoModel(Connection cn) {
         this.cn = cn;
     }
 	
-	public boolean criarMedico(String nome, int cpf, String senha, int matricula, int cargo) {
+	public boolean criarMedico(String nome, String cpf, String senha, String matricula, int cargo) {
 		String query = "INSERT INTO prontuariobd.medico(nome, cpf, senha, matricula, cargo) VALUES (?,?,?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
             ps.setString(1, nome);
-            ps.setInt(2, cpf);
+            ps.setString(2, cpf);
             ps.setString(3, senha);
-            ps.setInt(4, matricula);
+            ps.setString(4, matricula);
             ps.setInt(5, cargo);
             ps.executeUpdate();
             System.out.println("Cadastrado com sucesso");
@@ -36,27 +36,27 @@ public class MedicoModel {
 		return false;
 	}
 	
-	public MedicoModel lerMedico(int matricula) {
+	public MedicoModel lerMedico(String matricula) {
 		String query = "SELECT * FROM prontuariobd.medico WHERE matricula = (?)";
         
         try{
             PreparedStatement ps = cn.prepareStatement(query);
-            ps.setInt(1, matricula);
+            ps.setString(1, matricula);
             ResultSet rs = ps.executeQuery();
             rs.next();
             
             this.id = rs.getInt("id");
             this.nome = rs.getString("nome");
-            this.cpf = rs.getInt("cpf");
+            this.cpf = rs.getString("cpf");
             this.senha = rs.getString("senha");
-            this.matricula = rs.getInt("matricula");
+            this.matricula = rs.getString("matricula");
             this.cargo = rs.getInt("cargo");
             
             System.out.println("Id: " + rs.getInt("id"));
             System.out.println("Nome: " + rs.getString("nome"));
-            System.out.println("CPF: " + rs.getInt("cpf"));
+            System.out.println("CPF: " + rs.getString("cpf"));
             System.out.println("Senha: " + rs.getString("senha"));
-            System.out.println("matricula: " + rs.getInt("matricula"));
+            System.out.println("matricula: " + rs.getString("matricula"));
             System.out.println("cargo: " + rs.getInt("cargo"));
             return this;
             
@@ -68,28 +68,28 @@ public class MedicoModel {
 		return null;
 	}
 	
-	public MedicoModel lerMedico(int matricula, int cargo) {
+	public MedicoModel lerMedico(String matricula, int cargo) {
 		String query = "SELECT * FROM prontuariobd.medico WHERE matricula = (?) and cargo = (?)";
         
         try{
             PreparedStatement ps = cn.prepareStatement(query);
-            ps.setInt(1, matricula);
+            ps.setString(1, matricula);
             ps.setInt(2, cargo);
             ResultSet rs = ps.executeQuery();
             rs.next();
             
             this.id = rs.getInt("id");
             this.nome = rs.getString("nome");
-            this.cpf = rs.getInt("cpf");
+            this.cpf = rs.getString("cpf");
             this.senha = rs.getString("senha");
-            this.matricula = rs.getInt("matricula");
+            this.matricula = rs.getString("matricula");
             this.cargo = rs.getInt("cargo");
             
             System.out.println("Id: " + rs.getInt("id"));
             System.out.println("Nome: " + rs.getString("nome"));
             System.out.println("CPF: " + rs.getInt("cpf"));
             System.out.println("Senha: " + rs.getString("senha"));
-            System.out.println("matricula: " + rs.getInt("matricula"));
+            System.out.println("matricula: " + rs.getString("matricula"));
             System.out.println("cargo: " + rs.getInt("cargo"));
             return this;
             
@@ -101,15 +101,15 @@ public class MedicoModel {
 		return null;
 	}
 	
-	public boolean atualizarMedico(int id, String nome, int cpf, String senha, int matricula, int cargo) {
+	public boolean atualizarMedico(int id, String nome, String cpf, String senha, String matricula, int cargo) {
 		String query = "UPDATE prontuariobd.medico SET nome = ?, cpf = ?, senha = ?, matricula = ?, cargo = ? WHERE prontuariobd.medico.id = (?)";
         
         try {
             PreparedStatement ps = cn.prepareStatement(query);
             ps.setString(1, nome);
-            ps.setInt(2, cpf);
+            ps.setString(2, cpf);
             ps.setString(3, senha);
-            ps.setInt(4, matricula);
+            ps.setString(4, matricula);
             ps.setInt(5, cargo);
             ps.setInt(6, id);
             ps.executeUpdate();
@@ -135,7 +135,7 @@ public class MedicoModel {
 		return false;
 	}
 	
-	public int getCPF() {
+	public String getCPF() {
 		return this.cpf;
 	}
 	

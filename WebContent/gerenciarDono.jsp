@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,83 +20,37 @@
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2">Donos</h1>
           </div>
+          <form action="Cliente.do?acao=gerenciar" method="POST">
+			<select id="Clientes" name="Clientes">
+			<%
+			List listaIdCliente = (List)session.getAttribute("idClientes");
+  			List listaCpf = (List)session.getAttribute("cpfClientes");
+  			List listaNomeCliente = (List)session.getAttribute("nomeClientes");
+  			for(int i = 0; i < listaIdCliente.size(); i++) {
+  				String id = listaIdCliente.get(i).toString();
+  				String cpf = listaCpf.get(i).toString();
+    			String nome = listaNomeCliente.get(i).toString();
+ 			%>
+			<option value=<%=id%>> <%=nome%> - <%=cpf%> </option>																
+ 			<% } //fecha for
+			%>
+			</select><br>
+			<input type="submit" value="Gerenciar" name="btnGerenciar">
+		  </form>
+		  <button name="btnVisualizarAnimais">Visualizar Animais</button>
           <div class="table-responsive">
             <table class="table table-striped table-sm text-center">
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>Cpf </th>
-                  <th>Animais</th>
+                  <th>Idade </th>
+                  <th>Tipo </th>
+                  <th>Cor </th>
                   <th>Gerenciar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Angelo</td>
-                  <td>95429218866</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Agnes</td>
-                  <td>16301178700</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Beatriz</td>
-                  <td>16301178700</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Carla</td>
-                  <td>13698978711</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Daniel</td>
-                  <td>98859289800</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Filippo</td>
-                  <td>000000000000</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Julia</td>
-                  <td>11122233300</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Marcello</td>
-                  <td>222333444555</td>                  
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Lucas</td>
-                  <td>000000000000</td>                  
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Nathan</td>
-                  <td>78722260633</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
-                <tr>
-                  <td>Paula</td>
-                  <td>29217862200</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
-                </tr>
+              	                
               </tbody>
             </table>
           </div>          
