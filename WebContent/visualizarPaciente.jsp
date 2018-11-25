@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List" %>    
+<%@ page import="java.util.List" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 	<!-- icon de patinhas lá de cima -->
 	<link rel=" icon" href="bootstrap/favicon.ico"  type="image/x-icon">
 	<link rel=" shortcut icon" href="bootstrap/favicon.ico"  type="image/x-icon">
-	<title>Donos</title>
+	<title>Pacientes</title>
 </head>
 <body>
 	<%@include file="headerSistema.jsp"%>
@@ -18,36 +18,42 @@
         <%@include file="barraLateral.jsp"%>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Donos</h1>
+            <h1 class="h2">Pacientes</h1>
           </div>
           <div class="table-responsive">
             <table class="table table-striped table-sm text-center">
               <thead>
                 <tr>
+                  <th>Id Animal</th>
                   <th>Nome</th>
-                  <th>CPF</th>
-                  <th>Visualizar Animais</th>
-                  <th>Gerenciar</th>
+                  <th>Tipo</th>
+                  <th>Cor</th>
                 </tr>
               </thead>
               <tbody>
-              	<%
-				List listaIdCliente = (List)session.getAttribute("idClientes");
-  				List listaNomeCliente = (List)session.getAttribute("nomeClientes");
-  				List listaCpfCliente = (List)session.getAttribute("cpfClientes");
-  				for(int i = 0; i < listaIdCliente.size(); i++) {
-  					String idCliente = listaIdCliente.get(i).toString();
-  					String nomeCliente = listaNomeCliente.get(i).toString();
-    				String cpfCliente = listaCpfCliente.get(i).toString();
+				<%
+				List listaIdAnimal = (List)session.getAttribute("idAnimais");
+  				List listaNomeAnimal = (List)session.getAttribute("nomeAnimais");
+  				List listaTipoAnimal = (List)session.getAttribute("tipoAnimais");
+  				List listaCorAnimal = (List)session.getAttribute("corAnimais");
+  				List listaCpfCliente = (List)session.getAttribute("cpfClientesAnimais");
+  				String aux = (String)session.getAttribute("animalByCpfCliente");
+  				for(int i = 0; i < listaIdAnimal.size(); i++) {
+  					if(listaCpfCliente.get(i).toString().equals(aux)){
+  						String idAnimal = listaIdAnimal.get(i).toString();
+  						String nomeAnimal = listaNomeAnimal.get(i).toString();
+    					String tipoAnimal = listaTipoAnimal.get(i).toString();
+    					String corAnimal = listaCorAnimal.get(i).toString();
+  					
  				%>
  				<tr>
-                  <td><%=nomeCliente%></td>
-                  <td><%=cpfCliente%></td>
-                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=visualizar&idCliente=<%=idCliente%>">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="Cliente.do?acao=gerenciar&idCliente=<%=idCliente%>">Gerenciar</a></button></td> 
+                  <td><%=idAnimal%></td>
+                  <td><%=nomeAnimal%></td>
+                  <td><%=tipoAnimal%></td>
+                  <td><%=corAnimal%></td>
                 </tr>															
- 				<% } //fecha for
-				%>              
+ 				<% }} //fecha for
+				%>
               </tbody>
             </table>
           </div>          

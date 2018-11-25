@@ -43,8 +43,8 @@
  				<tr>
                   <td><%=nomeAnimal%></td>
                   <td><%=cpfCliente%></td>
-                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=visualizar&idAnimal=<%=idAnimal%>">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="">Gerenciar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="Prontuario.do?acao=visualizar&idAnimal=<%=idAnimal%>">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=gerenciar&idAnimal=<%=idAnimal%>">Gerenciar</a></button></td> 
                 </tr>															
  				<% } //fecha for
 				%>

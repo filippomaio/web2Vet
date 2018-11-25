@@ -35,8 +35,8 @@ public class AnimalController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String acao = request.getParameter("acao");
 		if (acao.equals("visualizar")){
-			//cadastrarAnimal(request,response);
-			System.out.println("OK GET");
+			visualizarAnimais(request,response);
+			//System.out.println("OK GET");
 		}
 	}
 
@@ -48,6 +48,18 @@ public class AnimalController extends HttpServlet {
 		if (acao.equals("cadastrar")){
 			cadastrarAnimal(request,response);
 		}
+	}
+	
+	protected void visualizarAnimais(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+        
+		int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+		ClienteController cliente = new ClienteController();
+		String cpf = cliente.lerCliente(idCliente,request).getCpf();
+		carregarAnimais(request);
+		sessao.setAttribute("animalByCpfCliente", cpf);		
+		request.getRequestDispatcher("visualizarPaciente.jsp").forward(request,response);
 	}
 	
 	protected void cadastrarAnimal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -115,5 +127,5 @@ public class AnimalController extends HttpServlet {
 		sessao.setAttribute("corAnimais", corAnimais);
 		sessao.setAttribute("cpfClientesAnimais", cpfClientesAnimais);
 	}
-
+	
 }

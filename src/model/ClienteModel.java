@@ -33,6 +33,35 @@ public class ClienteModel {
 		return false;
 	}
 	
+	public ClienteModel lerCliente(int id) {
+		String query = "SELECT * FROM prontuariobd.cliente WHERE id = (?)";
+        
+        try{
+            PreparedStatement ps = cn.prepareStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            this.id = rs.getInt("id");
+            this.nome = rs.getString("nome");
+            this.cpf = rs.getString("cpf");
+            this.endereco = rs.getString("endereco");
+            
+            System.out.println("Id: " + rs.getInt("id"));
+            System.out.println("Nome: " + rs.getString("nome"));
+            System.out.println("CPF: " + rs.getString("cpf"));
+            System.out.println("Endereço: " + rs.getString("endereco"));
+            return this;
+            
+        }catch(SQLException ex){
+            System.out.println("Um erro aconteceu: " + ex);
+        }
+        
+        
+		return null;
+	}
+	
+	
 	public ClienteModel lerCliente(String cpf) {
 		String query = "SELECT * FROM prontuariobd.cliente WHERE cpf = (?)";
         

@@ -37,6 +37,38 @@ public class AnimalModel {
 		return false;
 	}
 	
+	public AnimalModel carregarAnimaisByCliente(String cpfCliente) {
+		String query = "SELECT * FROM prontuariobd.animal WHERE cpfCliente = (?)";
+        
+        try{
+            PreparedStatement ps = cn.prepareStatement(query);
+            ps.setString(1, cpfCliente);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            this.id = rs.getInt("id");
+            this.nome = rs.getString("nome");
+            this.idade = rs.getInt("idade");
+            this.tipo = rs.getString("tipo");
+            this.cor = rs.getString("cor");
+            this.cpfCliente = rs.getString("cpfCliente");
+            
+            System.out.println("Id: " + rs.getInt("id"));
+            System.out.println("Nome: " + rs.getString("nome"));
+            System.out.println("Idade: " + rs.getInt("idade"));
+            System.out.println("Tipo: " + rs.getString("tipo"));
+            System.out.println("Cor: " + rs.getString("cor"));
+            System.out.println("cpfCliente: " + rs.getString("cpfCliente"));
+            return this;
+            
+        }catch(SQLException ex){
+            System.out.println("Um erro aconteceu: " + ex);
+        }
+        
+        
+		return null;
+	}
+	
 	public AnimalModel lerAnimal(int id) {
 		String query = "SELECT * FROM prontuariobd.animal WHERE id = (?)";
         

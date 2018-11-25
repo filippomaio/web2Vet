@@ -73,6 +73,13 @@ public class ClienteController extends HttpServlet {
         return false;
 	}
 
+	public ClienteModel lerCliente(int id,HttpServletRequest request) {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		cliente = new ClienteModel(usuario.getCn());
+		return cliente.lerCliente(id);
+	}
+	
 	public void carregarClientes(HttpServletRequest request) {
 		HttpSession sessao = request.getSession();
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
