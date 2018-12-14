@@ -93,4 +93,8 @@ public class LoginModel {
     	return cpf;
     }
     
+    public int getCargo() {
+    	return cargo;
+    }
+    
 }

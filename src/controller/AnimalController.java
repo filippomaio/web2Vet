@@ -36,7 +36,18 @@ public class AnimalController extends HttpServlet {
 		String acao = request.getParameter("acao");
 		if (acao.equals("visualizar")){
 			visualizarAnimais(request,response);
-			//System.out.println("OK GET");
+		}if(request.getParameter("idCliente") != null) {
+			int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+			if (acao.equals("visualizarAnimalByDono")){
+				visualizarAnimalByDono(idCliente,request,response);
+			}
+		}if(request.getParameter("idAnimal") != null) {
+			int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
+			if (acao.equals("editar")){
+				preencherAnimal(idAnimal,request,response);
+			}else if (acao.equals("remover")){
+				removerAnimal(idAnimal,request,response);
+			}
 		}
 	}
 
@@ -48,7 +59,64 @@ public class AnimalController extends HttpServlet {
 		if (acao.equals("cadastrar")){
 			cadastrarAnimal(request,response);
 		}
+		if (acao.equals("editar")){
+			editarAnimal(request,response);
+		}
 	}
+	
+	protected void editarAnimal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		animal = new AnimalModel(usuario.getCn());
+        
+		int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
+        String nome = request.getParameter("nome");
+        int idade = Integer.parseInt(request.getParameter("idade"));
+        String tipo = request.getParameter("tipo");
+        String cor = request.getParameter("cor");
+        String cpfCliente = request.getParameter("cpfCliente");      	
+        animal.atualizarAnimal(idAnimal, nome, idade, tipo, cor, cpfCliente);
+        request.setAttribute("message", "Animal editado com sucesso!");
+        usuario.carregarListas(request, response);
+        request.getRequestDispatcher("gerenciarPaciente.jsp").forward(request, response);
+	}
+	
+	protected void removerAnimal(int idAnimal, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		animal = new AnimalModel(usuario.getCn());
+		
+		if(animal.lerAnimal(idAnimal)!= null) {
+			animal.deletarAnimal(animal.getId());
+			request.setAttribute("message", "Animal removido com sucesso!");
+			usuario.carregarListas(request,response);			
+			request.getRequestDispatcher("GerenciarPaciente.jsp").forward(request, response);
+		}
+	}
+	
+	protected void preencherAnimal(int idAnimal, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		animal = new AnimalModel(usuario.getCn());
+		
+		if(animal.lerAnimal(idAnimal)!= null) {
+			sessao.setAttribute("idAnimalEditar", animal.getId());
+			sessao.setAttribute("nomeAnimalEditar", animal.getNome());
+			sessao.setAttribute("idadeAnimalEditar", animal.getIdade());
+			sessao.setAttribute("tipoAnimalEditar", animal.getTipo());
+			sessao.setAttribute("corAnimalEditar", animal.getCor());
+			sessao.setAttribute("cpfClienteAnimalEditar", animal.getCpfCliente());
+            request.getRequestDispatcher("editarPaciente.jsp").forward(request, response);
+		}
+	}
+	
+	protected void visualizarAnimalByDono(int idCliente, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		sessao.setAttribute("idClienteVisualizar", idCliente);
+		request.getRequestDispatcher("visualizarAnimalDoDono.jsp").forward(request, response);
+	}
+
 	
 	protected void visualizarAnimais(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
@@ -57,7 +125,9 @@ public class AnimalController extends HttpServlet {
 		int idCliente = Integer.parseInt(request.getParameter("idCliente"));
 		ClienteController cliente = new ClienteController();
 		String cpf = cliente.lerCliente(idCliente,request).getCpf();
-		carregarAnimais(request);
+
+		usuario.carregarListas(request, response);
+		
 		sessao.setAttribute("animalByCpfCliente", cpf);		
 		request.getRequestDispatcher("visualizarPaciente.jsp").forward(request,response);
 	}
@@ -76,6 +146,7 @@ public class AnimalController extends HttpServlet {
         ClienteController cliente = new ClienteController();
         if (cliente.hasCliente(cpfCliente,sessao)) {
         	animal.criarAnimal(nome, idade, tipo, cor, cpfCliente);
+        	usuario.carregarListas(request, response);
         	request.setAttribute("message", "Animal cadastrado com sucesso!");
             request.getRequestDispatcher("cadastrarPaciente.jsp").forward(request, response);
         }else {

@@ -46,30 +46,33 @@ public class LoginController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         String cpf = request.getParameter("cpf");
         String senha = request.getParameter("senha");
-		//List<String> l = new ArrayList<String>();
-		//l.add("A");
-		//l.add("B");
-		//l.add("C");
-		//l.add("D");
 		if (usuario.logar(cpf, senha)) {
-			//request.setAttribute("lista", l);
 			HttpSession sessao = request.getSession();
             sessao.setAttribute("usuario", this);
+            sessao.setAttribute("MeuCPF", usuario.getCPF());
+            sessao.setAttribute("cargo", usuario.getCargo());
 			request.setAttribute("usuario", this);
 			
-			//Carregar Listas
-			ClienteController cliente = new ClienteController();
-			cliente.carregarClientes(request);
-			AnimalController animal = new AnimalController();
-			animal.carregarAnimais(request);
+			carregarListas(request,response);
 			
 			request.getRequestDispatcher("bem_vindo.jsp").forward(request,response);
         }else {
-        	//revisar
         	request.setAttribute("message", "Login inválido");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
+	}
+	
+	public void carregarListas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Carregar Listas
+		ClienteController cliente = new ClienteController();
+		cliente.carregarClientes(request);
+		AnimalController animal = new AnimalController();
+		animal.carregarAnimais(request);
+		ProntuarioController prontuario = new ProntuarioController();
+		prontuario.carregarProntuarios(request);
+		MedicoController medico = new MedicoController();
+		medico.carregarMedicos(request);
 	}
 	
 	public Connection getCn() {

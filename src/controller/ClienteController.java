@@ -33,7 +33,13 @@ public class ClienteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String acao = request.getParameter("acao");
+		int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+		if (acao.equals("editar")){
+			preencherCliente(idCliente,request,response);
+		}else if (acao.equals("remover")){
+			removerCliente(idCliente,request,response);
+		}
 	}
 
 	/**
@@ -44,7 +50,59 @@ public class ClienteController extends HttpServlet {
 		if (acao.equals("cadastrar")){
 			cadastrarCliente(request,response);
 		}
+		if (acao.equals("editar")){
+			editarCliente(request,response);
+		}
 	}
+	
+	protected void editarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		cliente = new ClienteModel(usuario.getCn());
+        
+		int idCliente = Integer.parseInt(request.getParameter("idCliente"));
+        String nome = request.getParameter("nome");
+        String cpf = request.getParameter("cpf");
+        String endereco = request.getParameter("endereco");
+        
+        if (hasCliente(cpf,sessao)) {        	
+        	cliente.atualizarCliente(idCliente, nome, cpf, endereco);
+        	request.setAttribute("message", "Cliente editado com sucesso!");
+        	usuario.carregarListas(request, response);
+            request.getRequestDispatcher("gerenciarDono.jsp").forward(request, response);
+        }else {
+        	request.setAttribute("message", "Erro ao editar Cliente");
+            request.getRequestDispatcher("gerenciarDono.jsp").forward(request, response);
+        }
+	}
+	
+	protected void removerCliente(int idCliente, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		cliente = new ClienteModel(usuario.getCn());
+		
+		if(cliente.lerCliente(idCliente)!= null) {
+			cliente.deletarCliente(cliente.getCpf());
+			request.setAttribute("message", "Cliente removido com sucesso!");
+			usuario.carregarListas(request,response);			
+			request.getRequestDispatcher("GerenciarDono.jsp").forward(request, response);
+		}
+	}
+	
+	protected void preencherCliente(int idCliente, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		cliente = new ClienteModel(usuario.getCn());
+		
+		if(cliente.lerCliente(idCliente)!= null) {
+			sessao.setAttribute("idClienteEditar", cliente.getId());
+			sessao.setAttribute("nomeClienteEditar", cliente.getNome());
+			sessao.setAttribute("cpfClienteEditar", cliente.getCpf());
+			sessao.setAttribute("enderecoClienteEditar", cliente.getEndereco());
+            request.getRequestDispatcher("editarDono.jsp").forward(request, response);
+		}
+	}
+	
 	protected void cadastrarCliente(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sessao = request.getSession();
 		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
@@ -56,6 +114,7 @@ public class ClienteController extends HttpServlet {
         
         if (!hasCliente(cpf,sessao)) {        	
         	cliente.criarCliente(nome, cpf, endereco);
+        	usuario.carregarListas(request, response);
         	request.setAttribute("message", "Cliente castrado com sucesso!");
             request.getRequestDispatcher("cadastrarDono.jsp").forward(request, response);
         }else {

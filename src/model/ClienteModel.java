@@ -134,6 +134,10 @@ public class ClienteModel {
 		return this.cpf;
 	}
 	
+	public String getEndereco() {
+		return this.endereco;
+	}
+	
 	public ArrayList<ClienteModel> getClientes(){
         String query = "SELECT * FROM prontuariobd.cliente";
         

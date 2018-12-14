@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,5 +80,33 @@ public class MedicoController extends HttpServlet {
         medico = new MedicoModel(usuario.getCn());
         medico = medico.lerMedico(matricula);
         return medico.getCPF();
+	}
+	
+	public void carregarMedicos(HttpServletRequest request) {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		List<MedicoModel> medicos = new ArrayList<MedicoModel>();
+		medico = new MedicoModel(usuario.getCn());
+		medicos = medico.getMedicos();
+		ArrayList<String> idMedicos = new ArrayList<>();
+		ArrayList<String> nomeMedicos = new ArrayList<>();
+		ArrayList<String> cpfMedicos = new ArrayList<>();
+		ArrayList<String> senhaMedicos = new ArrayList<>();
+		ArrayList<String> matriculaMedicos = new ArrayList<>();
+		ArrayList<String> cargoMedicos = new ArrayList<>();
+		for(int i=0;i<medicos.size();i++) {
+			idMedicos.add(Integer.toString(medicos.get(i).getId()));
+			nomeMedicos.add(medicos.get(i).getNome());
+			cpfMedicos.add(medicos.get(i).getCpf());
+			senhaMedicos.add(medicos.get(i).getSenha());
+			matriculaMedicos.add(medicos.get(i).getMatricula());
+			cargoMedicos.add(Integer.toString(medicos.get(i).getCargo()));
+		}
+		sessao.setAttribute("idMedicos", idMedicos);
+		sessao.setAttribute("nomeMedicos", nomeMedicos);
+		sessao.setAttribute("cpfMedicos", cpfMedicos);
+		sessao.setAttribute("senhaMedicos", senhaMedicos);
+		sessao.setAttribute("matriculaMedicos", matriculaMedicos);
+		sessao.setAttribute("cargoMedicos", cargoMedicos);
 	}
 }

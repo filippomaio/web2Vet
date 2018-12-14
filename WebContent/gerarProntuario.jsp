@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="controller.*" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,40 +12,51 @@
 	<title>Gerar prontuário</title>
 </head>
 <body>
-	<% LoginController usuario = (LoginController)request.getAttribute("usuario");%>
 	<%@include file="headerSistema.jsp"%>
  	<div class="container-fluid">
       <div class="row">      
         <%@include file="barraLateral.jsp"%>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h4">Digite o nome do animal </h1>
-          </div>
-           <form class="form-inline">
-		        <div class="input-group">
-		          <input type="text" class="form-control col-xs-4"  placeholder="" aria-label="pesquisar" aria-describedby="pesquisar">
-		          <div class="input-group-prepend">
-		            <span class="input-group-text" id="pesquisa"><span data-feather="search"></span></span>
-		          </div>
-		        </div>
-	      </form> 
 	      <div class="table-responsive mt-3">
             <table class="table table-striped table-sm text-center">
               <thead>
                 <tr>
-                  <th>Nome do animal</th>
+                  <th>Id Prontuario</th>
                   <th>Cpf do dono</th>
-                  <th>Código do prontuário</th>
-                  <th>Prontuário </th>
+                  <th>Nome Animal</th>
+                  <th>Data Atendimento</th>
+                  <th>Relatorio</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Nutellinha</td>
-                  <td>16301178700</td>
-                  <td>0001</td>
-                  <td><button type="button" class="btn btn-secondary"><a href="">Visualizar</a></button></td>
-                </tr>
+                <%
+				List listaIdProntuarios = (List)session.getAttribute("idProntuarios");
+  				List listaIdAnimaisProntuarios = (List)session.getAttribute("idAnimaisProntuarios");
+  				List listaDataAtendimentos = (List)session.getAttribute("dataAtendimentos");
+  				
+  				List listaIdAnimais = (List)session.getAttribute("idAnimais");
+  				List listaNomeAnimais = (List)session.getAttribute("nomeAnimais");
+  				List listaCpfClientesAnimais = (List)session.getAttribute("cpfClientesAnimais");
+  				
+  				for(int i = 0; i < listaIdProntuarios.size(); i++) {
+  					String idProntuario = listaIdProntuarios.get(i).toString();
+  					String idAnimalProntuario = listaIdAnimaisProntuarios.get(i).toString();
+  					String dataAtendimento = listaDataAtendimentos.get(i).toString();
+					for(int j = 0; j < listaIdAnimais.size(); j++){
+						String idAnimal = listaIdAnimais.get(j).toString();
+						if(idAnimalProntuario.equals(idAnimal)){					
+  							String nomeAnimal = listaNomeAnimais.get(j).toString();
+    						String cpfCliente = listaCpfClientesAnimais.get(j).toString();
+ 				%>
+ 				<tr>
+                  <td><%=idProntuario%></td>
+                  <td><%=cpfCliente%></td>
+                  <td><%=nomeAnimal%></td>
+                  <td><%=dataAtendimento%></td>                  
+                  <td><button type="button" class="btn btn-secondary"><a href="Prontuario.do?acao=gerar&idProntuario=<%=idProntuario%>">Gerar</a></button></td> 
+				</tr>															
+ 				<% }}} //fecha for
+				%>
                
               </tbody>
             </table>

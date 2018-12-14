@@ -9,7 +9,7 @@
 	<!-- icon de patinhas lá de cima -->
 	<link rel=" icon" href="bootstrap/favicon.ico"  type="image/x-icon">
 	<link rel=" shortcut icon" href="bootstrap/favicon.ico"  type="image/x-icon">
-	<title>Pacientes</title>
+	<title>Animais</title>
 </head>
 <body>
 	<%@include file="headerSistema.jsp"%>
@@ -18,37 +18,62 @@
         <%@include file="barraLateral.jsp"%>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Pacientes</h1>
+            <h1 class="h2">Animais</h1>
           </div>
           <div class="table-responsive">
             <table class="table table-striped table-sm text-center">
               <thead>
                 <tr>
-                  <th>Nome do animal</th>
-                  <th>Cpf do dono</th>
-                  <th>Atendimentos</th>
+                  <th>Id Animal</th>
+                  <th>Nome</th>
+                  <th>Idade</th>
+                  <th>Tipo</th>
+                  <th>Cor</th>
                   <th>Editar</th>
                   <th>Remover</th>
                 </tr>
               </thead>
               <tbody>
 				<%
-				List listaIdAnimal = (List)session.getAttribute("idAnimais");
-  				List listaNomeAnimal = (List)session.getAttribute("nomeAnimais");
-  				List listaCpfCliente = (List)session.getAttribute("cpfClientesAnimais");
-  				for(int i = 0; i < listaIdAnimal.size(); i++) {
-  					String idAnimal = listaIdAnimal.get(i).toString();
-  					String nomeAnimal = listaNomeAnimal.get(i).toString();
-    				String cpfCliente = listaCpfCliente.get(i).toString();
+				List listaIdAnimais = (List)session.getAttribute("idAnimais");
+  				List listaNomeAnimais = (List)session.getAttribute("nomeAnimais");
+  				List listaIdadeAnimais = (List)session.getAttribute("idadeAnimais");
+  				List listaTipoAnimais = (List)session.getAttribute("tipoAnimais");
+  				List listaCorAnimais = (List)session.getAttribute("corAnimais");
+  				List listaCpfClientesAnimais= (List)session.getAttribute("cpfClientesAnimais");
+  				
+  				List listaIdClientes = (List)session.getAttribute("idClientes");
+  				List listaCpfClientes = (List)session.getAttribute("cpfClientes");
+  				
+  				String cpfClienteBuscado = "";
+  				for(int i = 0; i < listaIdClientes.size(); i++) {
+  					String idCliente = listaIdClientes.get(i).toString();
+  					String cpfCliente = listaCpfClientes.get(i).toString();
+  					if(idCliente.equals(session.getAttribute("idClienteVisualizar").toString())){
+  						cpfClienteBuscado = cpfCliente;
+  					}
+  				}
+  				
+  				for(int i = 0; i < listaIdAnimais.size(); i++) {
+  					String cpfCliente = listaCpfClientes.get(i).toString();
+  					if(cpfCliente.equals(cpfClienteBuscado)){
+  						String idAnimal = listaIdAnimais.get(i).toString();  						
+    					String nomeAnimal = listaNomeAnimais.get(i).toString();
+    					String idadeAnimal = listaIdadeAnimais.get(i).toString(); 
+    					String tipoAnimal = listaTipoAnimais.get(i).toString(); 
+    					String corAnimal = listaCorAnimais.get(i).toString();
+    					
  				%>
  				<tr>
+ 				  <td><%=idAnimal%></td>
                   <td><%=nomeAnimal%></td>
-                  <td><%=cpfCliente%></td>
-                  <td><button type="button" class="btn btn-secondary"><a href="Prontuario.do?acao=visualizar&idAnimal=<%=idAnimal%>">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=editar&idAnimal=<%=idAnimal%>">Editar</a></button></td>
+                  <td><%=idadeAnimal%></td>
+                  <td><%=tipoAnimal%></td>
+                  <td><%=corAnimal%></td>
+                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=editar&idAnimal=<%=idAnimal%>">Editar</a></button></td> 
                   <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=remover&idAnimal=<%=idAnimal%>">Remover</a></button></td>
                 </tr>															
- 				<% } //fecha for
+ 				<% }} //fecha for
 				%>
               </tbody>
             </table>

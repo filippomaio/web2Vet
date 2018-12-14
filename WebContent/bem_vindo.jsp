@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="controller.*" %>
+<%if(session.getAttribute("cargo").equals("0")){%>
+	<META http-equiv="refresh" content="1;URL=http://localhost:8080/Web2Vet/index.jsp"> 
+<%}%>
 <!DOCTYPE html>
 <html>
 <head>

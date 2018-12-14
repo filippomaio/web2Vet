@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.List" %>
+<%@ page import="java.util.List" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 	<!-- icon de patinhas lá de cima -->
 	<link rel=" icon" href="bootstrap/favicon.ico"  type="image/x-icon">
 	<link rel=" shortcut icon" href="bootstrap/favicon.ico"  type="image/x-icon">
-	<title>Próximos Pacientes</title>
+	<title>Prontuarios</title>
 </head>
 <body>
 	<%@include file="headerSistema.jsp"%>
@@ -18,50 +18,58 @@
         <%@include file="barraLateral.jsp"%>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Próximos Pacientes</h1>
+            <h1 class="h2">Prontuarios</h1>
           </div>
           <div class="table-responsive">
             <table class="table table-striped table-sm text-center">
               <thead>
                 <tr>
-                  <th>Nome do animal</th>
-                  <th>Último atendimento</th>
-                  <th>Próximo atendimento</th>
-                  <th>Prontuário</th>
+                  <th>Id Prontuario</th>
+                  <th>Aluno</th>
+                  <th>Professor</th>
+                  <th>Motivo</th>
+                  <th>Tratamento</th>
+                  <th>Data Atendimento</th>
+                  <th>Data Retorno</th>
+                  <th>Remover</th>
                 </tr>
               </thead>
               <tbody>
-              	<%
+				<%
 				List listaIdProntuarios = (List)session.getAttribute("idProntuarios");
   				List listaIdAnimaisProntuarios = (List)session.getAttribute("idAnimaisProntuarios");
+  				List listaCpfAlunosProntuarios = (List)session.getAttribute("cpfAlunosProntuarios");
+  				List listaCpfProfessoresProntuarios = (List)session.getAttribute("cpfProfessoresProntuarios");
+  				List listaMotivos = (List)session.getAttribute("motivos");
+  				List listaTratamentos= (List)session.getAttribute("tratamentos");
   				List listaDataAtendimentos = (List)session.getAttribute("dataAtendimentos");
   				List listaDataRetornos = (List)session.getAttribute("dataRetornos");
-  				
-  				List listaIdAnimais = (List)session.getAttribute("idAnimais");
-  				List listaNomeAnimais = (List)session.getAttribute("nomeAnimais");
-  				List listaCpfClientesAnimais = (List)session.getAttribute("cpfClientesAnimais");
+  				List listaAprovados = (List)session.getAttribute("aprovados");
   				
   				for(int i = 0; i < listaIdProntuarios.size(); i++) {
   					String idProntuario = listaIdProntuarios.get(i).toString();
-  					String idAnimalProntuario = listaIdAnimaisProntuarios.get(i).toString();
-  					String dataAtendimento = listaDataAtendimentos.get(i).toString();
-  					String dataRetorno = listaDataRetornos.get(i).toString();
-  					if(!dataRetorno.equals("")){
-						for(int j = 0; j < listaIdAnimais.size(); j++){
-							String idAnimal = listaIdAnimais.get(j).toString();
-							if(idAnimalProntuario.equals(idAnimal)){					
-  								String nomeAnimal = listaNomeAnimais.get(j).toString();
-    							String cpfCliente = listaCpfClientesAnimais.get(j).toString();
+  					String idAnimal = listaIdAnimaisProntuarios.get(i).toString();
+  					if(idAnimal.equals(session.getAttribute("idAnimalVisualizar").toString())){
+  						String cpfAlunosProntuario = listaCpfAlunosProntuarios.get(i).toString();  						
+    					String cpfProfessoresProntuario = listaCpfProfessoresProntuarios.get(i).toString();
+    					String motivoProntuario = listaMotivos.get(i).toString(); 
+    					String tratamentoProntuario = listaTratamentos.get(i).toString(); 
+    					String dataAtendimentoProntuario = listaDataAtendimentos.get(i).toString(); 
+    					String dataRetornoProntuario = listaDataRetornos.get(i).toString(); 
+    					
  				%>
  				<tr>
-                  <td><%=nomeAnimal%></td>
-                  <td><%=dataAtendimento%></td>
-                  <td><%=dataRetorno%></td>               
-                  <td><button type="button" class="btn btn-secondary"><a href="Prontuario.do?acao=gerar&idProntuario=<%=idProntuario%>">Visualizar</a></button></td> 
-				</tr>															
- 				<% }}}} //fecha for
+ 				  <td><%=idProntuario%></td>
+                  <td><%=cpfAlunosProntuario%></td>
+                  <td><%=cpfProfessoresProntuario%></td>
+                  <td><%=motivoProntuario%></td>
+                  <td><%=tratamentoProntuario%></td>
+                  <td><%=dataAtendimentoProntuario%></td>
+                  <td><%=dataRetornoProntuario%></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="Prontuario.do?acao=remover&idProntuario=<%=idProntuario%>">Remover</a></button></td>
+                </tr>															
+ 				<% }} //fecha for
 				%>
-               
               </tbody>
             </table>
           </div>          

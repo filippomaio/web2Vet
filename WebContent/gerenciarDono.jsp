@@ -26,8 +26,9 @@
                 <tr>
                   <th>Nome</th>
                   <th>CPF</th>
-                  <th>Visualizar Animais</th>
-                  <th>Gerenciar</th>
+                  <th>Animais</th>
+                  <th>Editar</th>
+                  <th>Remover</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,8 +44,9 @@
  				<tr>
                   <td><%=nomeCliente%></td>
                   <td><%=cpfCliente%></td>
-                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=visualizar&idCliente=<%=idCliente%>">Visualizar</a></button></td> 
-                  <td><button type="button" class="btn btn-secondary"><a href="Cliente.do?acao=gerenciar&idCliente=<%=idCliente%>">Gerenciar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="Animal.do?acao=visualizarAnimalByDono&idCliente=<%=idCliente%>">Visualizar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="Cliente.do?acao=editar&idCliente=<%=idCliente%>">Editar</a></button></td> 
+                  <td><button type="button" class="btn btn-secondary"><a href="Cliente.do?acao=remover&idCliente=<%=idCliente%>">Remover</a></button></td> 
                 </tr>															
  				<% } //fecha for
 				%>              

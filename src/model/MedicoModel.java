@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MedicoModel {
 
@@ -137,6 +138,54 @@ public class MedicoModel {
 	
 	public String getCPF() {
 		return this.cpf;
+	}
+	
+	public ArrayList<MedicoModel> getMedicos(){
+        String query = "SELECT * FROM prontuariobd.medico";
+        
+        try{
+            PreparedStatement ps = cn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<MedicoModel> medicos = new ArrayList<MedicoModel>();
+            while(rs.next()){
+            	MedicoModel medico = new MedicoModel(cn);
+                medico.id = rs.getInt("id");
+                medico.nome = rs.getString("nome");
+                medico.cpf = rs.getString("cpf");
+                medico.senha = rs.getString("senha");
+                medico.matricula = rs.getString("matricula");
+                medico.cargo = rs.getInt("cargo");
+                medicos.add(medico);
+            }
+            return medicos;
+        }catch(SQLException ex){
+            System.out.println("Um erro aconteceu: " + ex);
+        }
+        return null;
+    }
+
+	public int getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public int getCargo() {
+		return cargo;
 	}
 	
 }

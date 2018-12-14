@@ -3,6 +3,8 @@ package controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -34,7 +36,25 @@ public class ProntuarioController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String acao = request.getParameter("acao");
+		if(request.getParameter("idAnimal") != null) {
+			int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
+			if (acao.equals("visualizar")){
+				visualizarProntuarioByAnimal(idAnimal,request,response);
+			}
+		}		
+		if(request.getParameter("idProntuario") != null) {
+			int idProntuario = Integer.parseInt(request.getParameter("idProntuario"));
+			if (acao.equals("editar")){
+				preencherProntuario(idProntuario,request,response);
+			}else if (acao.equals("remover")){
+				removerProntuario(idProntuario,request,response);
+			}else if (acao.equals("gerar")) {
+				gerarProntuario(idProntuario,request,response);
+			}else if (acao.equals("aprovar")) {
+				aprovarProntuario(idProntuario, request, response);
+			}
+		}
 	}
 
 	/**
@@ -45,6 +65,55 @@ public class ProntuarioController extends HttpServlet {
 		if (acao.equals("cadastrar")){
 			cadastrarProntuario(request,response);
 		}
+		if (acao.equals("editar")){
+			editarProntuario(request,response);
+		}
+	}
+	
+	protected void editarProntuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Prontuário não é editável		
+	}
+	
+	protected void aprovarProntuario(int idProntuario, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		prontuario = new ProntuarioModel(usuario.getCn());
+		if(prontuario.lerProntuario(idProntuario)!= null) {
+			prontuario.aprovarProntuario(prontuario.getId());
+			request.setAttribute("message", "Prontuario aprovado com sucesso!");
+			usuario.carregarListas(request,response);			
+			request.getRequestDispatcher("notificacoes.jsp").forward(request, response);
+		}
+	}
+	
+	protected void gerarProntuario(int idProntuario, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();		
+		sessao.setAttribute("idProntuarioGerar", idProntuario);
+		request.getRequestDispatcher("relatorio.jsp").forward(request, response);
+	}
+	
+	protected void removerProntuario(int idProntuario, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		prontuario = new ProntuarioModel(usuario.getCn());
+		
+		if(prontuario.lerProntuario(idProntuario)!= null) {
+			prontuario.deletarProntuario(prontuario.getId());
+			request.setAttribute("message", "Prontuario removido com sucesso!");
+			usuario.carregarListas(request,response);			
+			request.getRequestDispatcher("bem_vindo.jsp").forward(request, response);
+		}
+	}
+	
+	protected void preencherProntuario(int idProntuario, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Prontuario não é editável
+	}
+	
+	protected void visualizarProntuarioByAnimal(int idAnimal, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		sessao.setAttribute("idAnimalVisualizar", idAnimal);
+		request.getRequestDispatcher("visualizarProntuarioDoPaciente.jsp").forward(request, response);
 	}
 	
 	protected void cadastrarProntuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -81,7 +150,8 @@ public class ProntuarioController extends HttpServlet {
         	int idAnimal = animal.getAnimalId(nome, cpfCliente, sessao);
         	String cpfAluno = usuario.getCPF();
         	String cpfProfessor = medico.getCPF(matriculaProf, sessao);
-        	prontuario.criarProntuario(idAnimal, cpfAluno, cpfProfessor, motivo, tratamento, dataAtendimento, dataRetorno);
+        	prontuario.criarProntuario(idAnimal, cpfAluno, cpfProfessor, motivo, tratamento, dataAtendimento, dataRetorno, 0);
+        	usuario.carregarListas(request, response);
         	request.setAttribute("message", "Prontuário cadastrado com sucesso!");
             request.getRequestDispatcher("consultarPaciente.jsp").forward(request, response);
         }else if (!(cliente.hasCliente(cpfCliente,sessao))){
@@ -98,5 +168,47 @@ public class ProntuarioController extends HttpServlet {
             request.getRequestDispatcher("consultarPaciente.jsp").forward(request, response);
         }
 	}
+	
+	public void carregarProntuarios(HttpServletRequest request) {
+		HttpSession sessao = request.getSession();
+		LoginController usuario = (LoginController)sessao.getAttribute("usuario");
+		List<ProntuarioModel> prontuarios = new ArrayList<ProntuarioModel>();
+		prontuario = new ProntuarioModel(usuario.getCn());
+		prontuarios = prontuario.getProntuarios();
+		ArrayList<String> idProntuarios = new ArrayList<>();
+		ArrayList<String> idAnimaisProntuarios = new ArrayList<>();
+		ArrayList<String> cpfAlunosProntuarios = new ArrayList<>();
+		ArrayList<String> cpfProfessoresProntuarios = new ArrayList<>();
+		ArrayList<String> motivos = new ArrayList<>();
+		ArrayList<String> tratamentos = new ArrayList<>();
+		ArrayList<String> dataAtendimentos = new ArrayList<>();
+		ArrayList<String> dataRetornos = new ArrayList<>();
+		ArrayList<String> aprovados = new ArrayList<>();
+		for(int i=0;i<prontuarios.size();i++) {
+			idProntuarios.add(Integer.toString(prontuarios.get(i).getId()));
+			idAnimaisProntuarios.add(Integer.toString(prontuarios.get(i).getIdAnimal()));
+			cpfAlunosProntuarios.add(prontuarios.get(i).getCpfAluno());
+			cpfProfessoresProntuarios.add(prontuarios.get(i).getCpfProfessor());
+			motivos.add(prontuarios.get(i).getMotivo());
+			tratamentos.add(prontuarios.get(i).getTratamento());
+			dataAtendimentos.add((prontuarios.get(i).getDataAtendimento()).toString());
+			if (prontuarios.get(i).getDataRetorno() != null) {
+				dataRetornos.add((prontuarios.get(i).getDataRetorno()).toString());
+			}else {
+				dataRetornos.add("");
+			}
+			aprovados.add(Integer.toString(prontuarios.get(i).getAprovado()));
+		}
+		sessao.setAttribute("idProntuarios", idProntuarios);
+		sessao.setAttribute("idAnimaisProntuarios", idAnimaisProntuarios);
+		sessao.setAttribute("cpfAlunosProntuarios", cpfAlunosProntuarios);
+		sessao.setAttribute("cpfProfessoresProntuarios", cpfProfessoresProntuarios);
+		sessao.setAttribute("motivos", motivos);
+		sessao.setAttribute("tratamentos", tratamentos);
+		sessao.setAttribute("dataAtendimentos", dataAtendimentos);
+		sessao.setAttribute("dataRetornos", dataRetornos);
+		sessao.setAttribute("aprovados", aprovados);
+	}
+
 
 }

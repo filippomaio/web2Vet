@@ -27,9 +27,9 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="#"></a>
-            <a class="dropdown-item" href="#"><span data-feather="settings"></span>Configurações</a>
+            <a class="dropdown-item" href="notificacoes.jsp"><span data-feather="settings"></span>Notificações</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#"><span data-feather="log-out"></span>Sair</a>
+            <a class="dropdown-item" href="login.jsp"><span data-feather="log-out"></span>Sair</a>
         </div>
       </div>     
  </nav>
